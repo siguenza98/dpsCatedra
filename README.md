@@ -4,6 +4,13 @@ Proyecto de catedra para la materia Diseño y Programación de Software Multipla
 
 Ciclo II 2021
 
+Integrantes:
+ - Fernando José Sigüenza Rodríguez SR161939
+ - Andy Hernandez Solorzano HS170505
+ - Renzo Alexander Genovez Gomez GG162362
+ - Claudia Raquel Cortez Rodezno CR160471
+ - Mauricio Alexander Machado Rivas MR171225
+
 ## Programas/archivos necesarios
 
 - [Composer](https://getcomposer.org/), para hacer uso del back-end.
@@ -24,3 +31,6 @@ Ciclo II 2021
 2. Abrir el cmd
 3. Ejecutar el comando 'npm start'
 4. El proyecto se abrirá por si mismo en el navegador
+
+## Enlaces
+- [Trello](https://trello.com/petya175)
