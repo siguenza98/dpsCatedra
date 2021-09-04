@@ -6,16 +6,21 @@ Ciclo II 2021
 
 ## Programas/archivos necesarios
 
-- [XAMPP](https://www.apachefriends.org/es/index.html).
-- [Node JS](https://nodejs.org/en/).
-- [Composer](https://getcomposer.org/).
-- Visual Studio Code, o similares.
-- Archivos base del proyecto, ya que incluye archivos dentro del gitignore.
+- [Composer](https://getcomposer.org/), para hacer uso del back-end.
+- [Node JS](https://nodejs.org/en/), para hacer uso del front-end.
+- Visual Studio Code, u otro editor de código.
+- Archivos base del proyecto.
 
-## Cómo correr la aplicación
+## Cómo correr el back-end (Laravel)
 
-1. Instalar XAMPP, NodeJS y Composer
-2. Extraer archivos base del proyecto en 'C:\xampp\htdocs'
-3. Abrir cmd en 'C:\xampp\htdocs\peyta'
-4. Ejecutar el comando 'php artisan serve'
-5. Abrir 'http://localhost:8000/' en el navegador
+1. Navegar a la raíz de la carpeta 'backend'
+2. Abrir el cmd
+3. Ejecutar el comando 'php artisan serve'
+4. Abrir 'http://127.0.0.1:8000/' en el navegador
+
+## Cómo correr el front-end (React Native)
+
+1. Navegar a la raíz de la carpeta 'frontend'
+2. Abrir el cmd
+3. Ejecutar el comando 'npm start'
+4. El proyecto se abrirá por si mismo en el navegador
