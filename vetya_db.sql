@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2020 a las 04:33:09
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.2
+-- Tiempo de generación: 06-10-2021 a las 04:20:24
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,67 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asuetos`
---
-
-CREATE TABLE `asuetos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL,
-  `empleado_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `citas`
 --
 
 CREATE TABLE `citas` (
-  `id` int(10) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `nombre_mascota` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_cita` date NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
   `hora` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_cita` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `especificaciones` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_empleado` int(11) NOT NULL,
-  `id_formulario` int(11) NOT NULL,
+  `motivo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detalles` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipocita_id` int(10) UNSIGNED NOT NULL,
+  `cliente_id` int(10) UNSIGNED NOT NULL,
+  `empleado_id` int(10) UNSIGNED NOT NULL,
+  `mascota_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clientes`
---
-
-CREATE TABLE `clientes` (
-  `id` int(10) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto_perfil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `categoria` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id`, `nombre`, `correo`, `foto_perfil`, `telefono`, `password`, `categoria`, `created_at`, `updated_at`) VALUES
-(1, 'adonis', 'adoniscortez98@hotmail.com', NULL, NULL, NULL, NULL, '2020-10-16 02:32:44', '2020-10-16 02:32:44'),
-(3, NULL, 'ab@ab.com', NULL, NULL, NULL, NULL, '2020-10-16 06:24:18', '2020-10-16 06:24:18'),
-(5, NULL, 'as@as.com', NULL, NULL, NULL, NULL, '2020-10-17 09:04:51', '2020-10-17 09:04:51'),
-(6, 'adprueba', 'adprueba@mail.com', NULL, '1234-5678', NULL, NULL, '2020-10-19 01:28:58', '2020-10-19 01:28:58'),
-(12, 'David garcia', 'davidg@hotmail.com', NULL, '12345678', NULL, NULL, '2020-11-20 07:52:00', '2020-11-20 07:52:00'),
-(13, 'Javier Caceres', 'javic@hotmail.com', NULL, '12345678', NULL, NULL, '2020-11-20 07:52:39', '2020-11-20 07:52:39');
 
 -- --------------------------------------------------------
 
@@ -95,22 +50,12 @@ INSERT INTO `clientes` (`id`, `nombre`, `correo`, `foto_perfil`, `telefono`, `pa
 
 CREATE TABLE `diagnosticos` (
   `id` int(10) UNSIGNED NOT NULL,
-  `cliente_id` int(11) NOT NULL,
-  `nombre_mascota` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `especie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `raza` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `edad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vacunacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `motivo` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vacunas_realizadas` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `peso` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pulso` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `temperatura` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `diagnostico_final` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tratamiento` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `empleado_id` int(11) NOT NULL,
+  `cita_id` int(10) UNSIGNED NOT NULL,
+  `peso` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pulso` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `temperatura` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `diagnostico_final` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tratamiento` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -118,87 +63,23 @@ CREATE TABLE `diagnosticos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Estructura de tabla para la tabla `mascotas`
 --
 
-CREATE TABLE `empleados` (
-  `id` int(10) NOT NULL,
-  `nombres` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellidos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto_perfil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `categoria` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `empleados`
---
-
-INSERT INTO `empleados` (`id`, `nombres`, `apellidos`, `correo`, `foto_perfil`, `telefono`, `password`, `categoria`, `created_at`, `updated_at`) VALUES
-(1, 'Roberto', 'arevalo', 'admin@petya.com', '', '2345-6789', '', 'A', NULL, NULL),
-(2, 'Jose', 'martinez', 'empleado1@petya.com', '', '2145-6798', '', 'E', NULL, NULL),
-(3, 'Alfredo', 'gomez', 'empleado2@petya.com', NULL, '1234-7898', NULL, 'E', '2020-10-17 02:33:19', '2020-10-17 02:33:19'),
-(4, 'Andres', 'apell2', 'empleado3@petya.com', NULL, '1234-5678', NULL, 'R', '2020-10-17 02:38:02', '2020-10-18 02:39:31'),
-(5, 'a', 'a', 'a@a.com', NULL, '1234-5678', NULL, 'E', '2020-10-17 02:39:31', '2020-11-20 08:40:27'),
-(10, 'prueba44', 'prueba44', 'adonis@gmail.com', NULL, '1234-2345', NULL, 'R', '2020-10-17 10:31:58', '2020-10-18 23:40:56');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `formulario_citas`
---
-
-CREATE TABLE `formulario_citas` (
-  `id` int(10) NOT NULL,
-  `fecha_cita` date NOT NULL,
-  `hora` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre_mascota` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `especie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `raza` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `edad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vacunacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `motivo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vacunas_realizadas` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_empleado` int(11) NOT NULL,
-  `peso` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pulso` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `temperatura` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cliente_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `horarios`
---
-
-CREATE TABLE `horarios` (
+CREATE TABLE `mascotas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `dia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hora_inicio` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hora_fin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `empleado_id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `especie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `raza` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `edad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `peso` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vacunas` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usuario_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `horarios`
---
-
-INSERT INTO `horarios` (`id`, `dia`, `hora_inicio`, `hora_fin`, `empleado_id`, `created_at`, `updated_at`) VALUES
-(2, 'Lunes', '9:00', '10:00', 2, NULL, '2020-10-18 07:05:15'),
-(5, 'Martes', '9:00', '10:00', 2, '2020-11-20 07:24:02', '2020-11-20 07:24:02'),
-(6, 'Lunes', '10:00', '11:00', 3, '2020-11-20 07:24:43', '2020-11-20 07:24:43'),
-(7, 'Martes', '10:00', '11:00', 3, '2020-11-20 07:24:58', '2020-11-20 07:24:58');
 
 -- --------------------------------------------------------
 
@@ -210,73 +91,110 @@ CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(2, '2020_10_13_232632_create_clientes_table', 1),
-(3, '2020_10_13_235220_create_formulario_citas_table', 2),
-(4, '2020_10_14_002610_create_empleados_table', 3),
-(5, '2020_10_14_010237_create_citas_table', 4),
-(6, '2020_10_14_021019_create_diagnosticos_table', 5),
-(7, '2020_10_14_022353_create_horarios_table', 6),
-(8, '2020_10_14_022916_create_asuetos_table', 7);
+(1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(2, '2021_10_5_021000__create_tipo_citas_table', 1),
+(3, '2021_10_5_021005__create_tipo_usuarios_table', 1),
+(4, '2021_10_5_021010__create_usuarios_table', 1),
+(5, '2021_10_5_021015__create_mascotas_table', 1),
+(6, '2021_10_5_021020__create_citas_table', 1),
+(7, '2021_10_5_021025__create_diagnosticos_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_citas`
+--
+
+CREATE TABLE `tipo_citas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `detalle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuarios`
+--
+
+CREATE TABLE `tipo_usuarios` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `detalle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombres` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellidos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipousuario_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `asuetos`
---
-ALTER TABLE `asuetos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `empleado_id` (`empleado_id`);
-
---
 -- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_formulario` (`id_formulario`),
-  ADD KEY `id_empleado` (`id_empleado`);
-
---
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `citas_tipocita_id_foreign` (`tipocita_id`),
+  ADD KEY `citas_cliente_id_foreign` (`cliente_id`),
+  ADD KEY `citas_empleado_id_foreign` (`empleado_id`),
+  ADD KEY `citas_mascota_id_foreign` (`mascota_id`);
 
 --
 -- Indices de la tabla `diagnosticos`
 --
 ALTER TABLE `diagnosticos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `empleado_id` (`empleado_id`);
+  ADD KEY `diagnosticos_cita_id_foreign` (`cita_id`);
 
 --
--- Indices de la tabla `empleados`
+-- Indices de la tabla `mascotas`
 --
-ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `formulario_citas`
---
-ALTER TABLE `formulario_citas`
+ALTER TABLE `mascotas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cliente_id` (`cliente_id`),
-  ADD KEY `cliente_id_2` (`cliente_id`);
-
---
--- Indices de la tabla `horarios`
---
-ALTER TABLE `horarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `empleado_id` (`empleado_id`);
+  ADD KEY `mascotas_usuario_id_foreign` (`usuario_id`);
 
 --
 -- Indices de la tabla `migrations`
@@ -285,91 +203,114 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indices de la tabla `personal_access_tokens`
 --
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- AUTO_INCREMENT de la tabla `asuetos`
+-- Indices de la tabla `tipo_citas`
 --
-ALTER TABLE `asuetos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tipo_citas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_usuarios`
+--
+ALTER TABLE `tipo_usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuarios_tipousuario_id_foreign` (`tipousuario_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
 
 --
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `diagnosticos`
 --
 ALTER TABLE `diagnosticos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `empleados`
+-- AUTO_INCREMENT de la tabla `mascotas`
 --
-ALTER TABLE `empleados`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `formulario_citas`
---
-ALTER TABLE `formulario_citas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `horarios`
---
-ALTER TABLE `horarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `mascotas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_citas`
+--
+ALTER TABLE `tipo_citas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_usuarios`
+--
+ALTER TABLE `tipo_usuarios`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `asuetos`
---
-ALTER TABLE `asuetos`
-  ADD CONSTRAINT `asuetos_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `citas`
 --
 ALTER TABLE `citas`
-  ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formulario_citas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id`);
+  ADD CONSTRAINT `citas_cliente_id_foreign` FOREIGN KEY (`cliente_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `citas_empleado_id_foreign` FOREIGN KEY (`empleado_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `citas_mascota_id_foreign` FOREIGN KEY (`mascota_id`) REFERENCES `mascotas` (`id`),
+  ADD CONSTRAINT `citas_tipocita_id_foreign` FOREIGN KEY (`tipocita_id`) REFERENCES `tipo_citas` (`id`);
 
 --
 -- Filtros para la tabla `diagnosticos`
 --
 ALTER TABLE `diagnosticos`
-  ADD CONSTRAINT `diagnosticos_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`id`);
+  ADD CONSTRAINT `diagnosticos_cita_id_foreign` FOREIGN KEY (`cita_id`) REFERENCES `citas` (`id`);
 
 --
--- Filtros para la tabla `formulario_citas`
+-- Filtros para la tabla `mascotas`
 --
-ALTER TABLE `formulario_citas`
-  ADD CONSTRAINT `formulario_citas_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `mascotas`
+  ADD CONSTRAINT `mascotas_usuario_id_foreign` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 --
--- Filtros para la tabla `horarios`
+-- Filtros para la tabla `usuarios`
 --
-ALTER TABLE `horarios`
-  ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_tipousuario_id_foreign` FOREIGN KEY (`tipousuario_id`) REFERENCES `tipo_usuarios` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
