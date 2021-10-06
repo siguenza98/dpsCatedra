@@ -15,23 +15,15 @@ class CreateDiagnosticosTable extends Migration
     {
         Schema::create('diagnosticos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
-            $table->string('nombre_mascota');
-            $table->string('especie');
-            $table->string('raza');
-            $table->string('edad');
-            $table->string('sexo');
-            $table->string('color');
-            $table->string('vacunacion');
-            $table->text('motivo');
-            $table->text('vacunas_realizadas');            
+            $table->integer('cita_id')->unsigned();         
             $table->string('peso');
             $table->string('pulso');
             $table->string('temperatura');
             $table->text('diagnostico_final');
             $table->text('tratamiento');
-            $table->integer('empleado_id');
             $table->timestamps();
+            $table->foreign('cita_id')->references('id')->on('citas');
+
             $table->engine = "InnoDB";
         });
     }
