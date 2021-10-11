@@ -4,12 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //Declarando controladores
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\FormularioCitaController;
-use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\DiagnosticoController;
+use App\Http\Controllers\MascotaController;
+use App\Http\Controllers\TipoCitaController;
+use App\Http\Controllers\TipoUsuarioController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,17 +29,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //***********ruta para acceder al backend
 
-//ruta a metodos del controller cliente
-Route::resource('petya-clientes', ClienteController::class);
-//ruta a metodos del controller cliente
-Route::resource('petya-formcita', FormularioCitaController::class);
-//ruta a metodos del controller empleado
-Route::resource('petya-empleados', EmpleadoController::class);
-//ruta a metodos del controller horario
-Route::resource('petya-horarios', HorarioController::class);
-//ruta para ejecutar metodo de tabla de frmcitas 
-Route::get('petya-formcita/tabla', [FormularioCitaController::class, 'tabla']);
-//ruta a metodos del controller cita
-Route::resource('petya-citas', CitaController::class);
-//ruta a metodos del controller diagnostico
-Route::resource('petya-diagnosticos', DiagnosticoController::class);
+
+//ruta a metodos del controller login
+Route::resource('vetya-login', LoginController::class);
+Route::post('/login', [LoginController::class, 'login']);
+
+//ruta a metodos del controller citas
+Route::resource('vetya-citas', CitaController::class);
+
+//ruta a metodos del controller diagnosticos
+Route::resource('vetya-diagnosticos', DiagnosticoController::class);
+
+//ruta a metodos del controller mascotas
+Route::resource('vetya-mascotas', MascotaController::class);
+
+//ruta a metodos del controller tipo citas
+Route::resource('vetya-tipocitas', TipoCitaController::class);
+
+//ruta a metodos del controller tipo usuarios
+Route::resource('vetya-tipousuarios', TipoUsuarioController::class);
+
+//ruta a metodos del controller usuarios
+Route::resource('vetya-usuarios', UsuarioController::class);
+

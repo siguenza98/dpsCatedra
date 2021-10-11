@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 //declarando modelo a usar en controller
-use App\Models\Cliente;
+use App\Models\Usuario;
 
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class UsuarioController extends Controller
 {
 
     public function index()
     {
         //seleccionando todos los registros de la tabla por medio del modelo
-        $clientes = Cliente::all();
-        if(is_null($clientes) || $clientes == ''){
+        $usuarios = Usuario::all();
+        if(is_null($usuarios) || $usuarios == ''){
             //$respuesta = ['resultado'=>'NO'];
             $code = 204;//peticion sin contenido
         }else{
@@ -23,22 +23,22 @@ class ClienteController extends Controller
         }
         
         //retornando json para frontend
-        return response()->json($clientes,$code);
+        return response()->json($usuarios,$code);
     }
 
     public function store(Request $request)
     {
-        //creando obj del modelo Cliente para guardar nuevo registro
-        $cliente = new Cliente();
+        //creando obj del modelo Usuario para guardar nuevo registro
+        $usuario = new Usuario();
         //asignando datos del request al objeto
-        $cliente->nombre = $request->input('nombre');
-        $cliente->correo = $request->input('correo');
-        $cliente->foto_perfil = $request->input('foto_perfil');
-        $cliente->telefono = $request->input('telefono');
-        $cliente->password = $request->input('password');
-        $cliente->categoria = $request->input('categoria');
+        $usuario->nombres = $request->input('nombres');
+        $usuario->apellidos = $request->input('apellidos');
+        $usuario->correo = $request->input('correo');
+        $usuario->telefono = $request->input('telefono');
+        $usuario->password = $request->input('password');
+        $usuario->tipousuario_id = $request->input('tipousuario_id');;
         //guardando cliente
-        if($cliente->save()){
+        if($usuario->save()){
             $respuesta = ['resultado'=>'OK'];
             $code = 200;//peticion con exito
         }else{
@@ -51,23 +51,23 @@ class ClienteController extends Controller
 
     public function show($id)
     {
-        $cliente = Cliente::find($id);
-        return json_encode($cliente);
+        $usuario = Usuario::find($id);
+        return json_encode($usuario);
     }
 
     public function update(Request $request, $id)
     {
         //seleccionando registro segun id para modifircarlo
-        $cliente = Cliente::find($id);
+        $usuario = Usuario::find($id);
         //asignando datos del request al objeto
-        $cliente->nombre = $request->input('nombre');
-        $cliente->correo = $request->input('correo');
-        $cliente->foto_perfil = $request->input('foto_perfil');
-        $cliente->telefono = $request->input('telefono');
-        $cliente->password = $request->input('password');
-        $cliente->categoria = $request->input('categoria');
+        $usuario->nombres = $request->input('nombres');
+        $usuario->apellidos = $request->input('apellidos');
+        $usuario->correo = $request->input('correo');
+        $usuario->telefono = $request->input('telefono');
+        $usuario->password = $request->input('password');
+        $usuario->categoria = $request->input('categoria');
         //guardando cambios en el registro
-        if($cliente->save()){
+        if($usuario->save()){
             $respuesta = ['resultado'=>'OK'];
             $code = 200;//peticion con exito
         }else{
@@ -80,8 +80,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //buscando registro por id
-        $cliente = Cliente::find($id);
-        if($cliente->delete()){
+        $usuario = Usuario::find($id);
+        if($usuario->delete()){
             $respuesta = ['resultado'=>'OK'];
             $code = 200;//peticion con exito
         }else{
