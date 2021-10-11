@@ -1,10 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const UsuarioHome = () => {
+
+const UsuarioHome = ({route, navigation}) => {
+    //Obtiene el valor del usuario registrado
+    var usuario = route.params;
+    
     return (
         <View>
-            <Text>UsuarioHome</Text>
+            <Text>Bienvenido, {usuario.nombres}</Text>
         </View>
     )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}) => {
     const [correo, setCorreo] = useState('');
@@ -7,14 +8,15 @@ const LoginScreen = ({navigation}) => {
     const [errorText, setErrorText] = useState(' ');
 
     const handleLogin = () => {
-
         setErrorText(" ");
+        //Conexion a la api
         fetch('http://127.0.0.1:8000/api/login', { 
             method: 'POST', 
             headers: { 
                 Accept: 'application/json', 
                 'Content-Type': 'application/json' }, 
             body: JSON.stringify({ 
+                //datos enviados por post
                 correo: correo, 
                 password: password 
             }) 
@@ -22,12 +24,19 @@ const LoginScreen = ({navigation}) => {
         .then((response)=>response.json())
         .then((json)=>{
             if(json.length != 0){
-                alert(json.correo);
+                storeLogin(json);
             }
         })
         .catch((error)=>{
             setErrorText("Correo o contraseña incorrecta");
         });
+    }
+
+    const storeLogin = async (usuario) =>{
+        //guardando datos de sesion
+        await AsyncStorage.setItem('@logueado', "True");
+        await AsyncStorage.setItem('@usuario', JSON.stringify(usuario));
+        navigation.navigate("UsuarioHome", usuario);
     }
 
     return (

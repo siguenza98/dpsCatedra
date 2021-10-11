@@ -1,8 +1,7 @@
-import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 
-const LoginScreen = ({navigation}) => {
+const RegistrarseScreen = ({navigation}) => {
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [correo, setCorreo] = useState('');
@@ -149,7 +148,7 @@ const LoginScreen = ({navigation}) => {
     )
 }
 
-export default LoginScreen
+export default RegistrarseScreen
 
 const styles = StyleSheet.create({
     container: {
