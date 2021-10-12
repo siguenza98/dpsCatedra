@@ -1,4 +1,4 @@
-# <p align="center">Pet Ya!</p>
+# <p align="center">Vet Ya!</p>
 
 Proyecto de catedra para la materia Diseño y Programación de Software Multiplataforma DPS104 G03T
 
