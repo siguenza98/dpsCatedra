@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2021 a las 04:20:24
+-- Tiempo de generación: 12-10-2021 a las 03:34:11
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -137,6 +137,15 @@ CREATE TABLE `tipo_citas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tipo_citas`
+--
+
+INSERT INTO `tipo_citas` (`id`, `detalle`, `created_at`, `updated_at`) VALUES
+(1, 'Chequeo géneral', NULL, NULL),
+(2, 'Visita estética', NULL, NULL),
+(3, 'Vacunación', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +158,16 @@ CREATE TABLE `tipo_usuarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_usuarios`
+--
+
+INSERT INTO `tipo_usuarios` (`id`, `detalle`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', NULL, NULL),
+(2, 'Empleado', NULL, NULL),
+(3, 'Recepcionista', NULL, NULL),
+(4, 'Cliente', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,6 +186,17 @@ CREATE TABLE `usuarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `correo`, `telefono`, `password`, `tipousuario_id`, `created_at`, `updated_at`) VALUES
+(1, 'Fernando José', 'Sigüenza Rodríguez', 'fernando.siguenza.98@gmail.com', '63049509', '123456', 4, NULL, NULL),
+(5, 'admin', 'admin', 'admin@vetya.com', '63049509', 'admin', 1, NULL, NULL),
+(6, 'veterinario', 'veterinario', 'veterinario@vetya.com', '63049509', 'veterinario', 2, NULL, NULL),
+(7, 'recepcionista', 'recepcionista', 'recepcionista@vetya.com', '63049509', 'recepcionista', 3, NULL, NULL),
+(8, 'usuario', 'usuario', 'usuario@vetya.com', '63049509', 'usuario', 4, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -267,19 +297,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `tipo_citas`
 --
 ALTER TABLE `tipo_citas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuarios`
 --
 ALTER TABLE `tipo_usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
