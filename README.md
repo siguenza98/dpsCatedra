@@ -36,3 +36,6 @@ Integrantes:
 ## Enlaces
 - [Trello](https://trello.com/petya175)
 - [Avance 1](https://docs.google.com/document/d/1B-8AZnB5ez5oxT0fwDOb4hkKZC_GxV1CviMRGzR4qew/edit)
+
+## Licencia
+Licencia de MIT, ver archivo LICENCE
