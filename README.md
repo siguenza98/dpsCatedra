@@ -15,6 +15,7 @@ Integrantes:
 
 - [Composer](https://getcomposer.org/), para hacer uso del back-end.
 - [Node JS](https://nodejs.org/en/), para hacer uso del front-end.
+- [XAMPP](https://www.apachefriends.org/es/index.html), para hacer uso de la base de datos.
 - Visual Studio Code, u otro editor de código.
 - Archivos base del proyecto.
 
