@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -10,6 +11,8 @@ import LoginScreen from './src/screens/LoginScreen';
 import RegistrarseScreen from './src/screens/RegistrarseScreen';
 /*Homes*/
 import UsuarioHome from './src/screens/Usuario/UsuarioHome';
+import AdminNavigation from './src/navigation/AdminNavigation';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -23,7 +26,7 @@ export default function App() {
         <Stack.Screen options={{headerShown: false}} name="Registrarse" component={RegistrarseScreen} />
 
         <Stack.Screen options={{headerShown: false}} name="UsuarioHome" component={UsuarioHome} />
-
+        <Stack.Screen options={{headerShown: false}} name="AdminNavigation" component={AdminNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

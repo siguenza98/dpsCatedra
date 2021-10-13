@@ -12,10 +12,18 @@ const SplashScreen = ({navigation}) => {
     const getData = async () => {  
         try {   
             const logueado = await AsyncStorage.getItem('@logueado');
-
+            /*
+            await AsyncStorage.removeItem('@logueado');
+            await AsyncStorage.removeItem('@usuario');
+           */
             if(logueado !== null) {      
                 var usuario = await AsyncStorage.getItem('@usuario');
                 usuario = JSON.parse(usuario);
+                if(usuario.tipousuario_id == 1){
+                    setTimeout(() => {
+                        navigation.navigate('AdminNavigation', usuario);
+                    }, 2000);
+                }
                 if(usuario.tipousuario_id == 4){
                     setTimeout(() => {
                         navigation.navigate('UsuarioHome', usuario);

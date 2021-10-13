@@ -3,30 +3,24 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import AdminTipoCitas from './AdminTipoCitas';
 
-const AdminHome = ({ route, navigation }) => {
+
+const AdminTipoCitas = ({ route, navigation }) => {
     //Obtiene el valor del usuario registrado
     var usuario = route.params;
-    const Drawer = createDrawerNavigator();
 
     return (
-
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding">
-            <Text>AAAAAAAAAAAAAAAA</Text>
-            <Image
-                style={{ height: 100, width: 300, marginBottom: 40 }}
-                source={require('..../img/logo.png')}
-            />
-
-        </KeyboardAvoidingView>
-
+        <>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior="padding">
+                
+            </KeyboardAvoidingView>
+        </>
     )
 }
 
-export default AdminHome
+export default AdminTipoCitas
 
 const styles = StyleSheet.create({
     container: {

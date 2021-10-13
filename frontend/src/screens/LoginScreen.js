@@ -36,7 +36,9 @@ const LoginScreen = ({navigation}) => {
         //guardando datos de sesion
         await AsyncStorage.setItem('@logueado', "True");
         await AsyncStorage.setItem('@usuario', JSON.stringify(usuario));
-        navigation.navigate("UsuarioHome", usuario);
+        if(usuario.tipousuario_id === 1){
+            navigation.navigate("AdminNavigation", usuario);
+        }
     }
 
     return (
