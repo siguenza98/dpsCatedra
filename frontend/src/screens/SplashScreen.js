@@ -21,18 +21,18 @@ const SplashScreen = ({navigation}) => {
                 usuario = JSON.parse(usuario);
                 if(usuario.tipousuario_id == 1){
                     setTimeout(() => {
-                        navigation.navigate('AdminNavigation', usuario);
+                        navigation.push('AdminNavigation', usuario);
                     }, 2000);
                 }
                 if(usuario.tipousuario_id == 4){
                     setTimeout(() => {
-                        navigation.navigate('UsuarioHome', usuario);
+                        navigation.push('UsuarioHome', usuario);
                     }, 2000);
                 }    
             }  
             else{
                 setTimeout(() => {
-                    navigation.navigate('Login');
+                    navigation.push('Login');
                 }, 2000);
             }
         } catch(e) {   

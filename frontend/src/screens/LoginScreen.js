@@ -37,7 +37,7 @@ const LoginScreen = ({navigation}) => {
         await AsyncStorage.setItem('@logueado', "True");
         await AsyncStorage.setItem('@usuario', JSON.stringify(usuario));
         if(usuario.tipousuario_id === 1){
-            navigation.navigate("AdminNavigation", usuario);
+            navigation.push("AdminNavigation", usuario);
         }
     }
 
@@ -79,7 +79,7 @@ const LoginScreen = ({navigation}) => {
 
                 <TouchableOpacity
                     style={[styles.button, styles.buttonOutline]}
-                    onPress={() => navigation.navigate('Registrarse')}
+                    onPress={() => navigation.push('Registrarse')}
                 >
                     <Text style={styles.buttonOutlineText}>Registrarse</Text>
                 </TouchableOpacity>

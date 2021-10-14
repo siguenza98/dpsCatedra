@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const TipoCitasNavigation = ({ route, navigation }) => {
     var usuario = route.params;
     return (
-        <Stack.Navigator initialRouteName="TipoUsuarioIndex">
+        <Stack.Navigator initialRouteName="TipoCitasIndex">
             <Stack.Screen options={{ headerShown: false }} name="TipoCitasIndex" component={TipoCitasIndex} initialParams={usuario}/>
             <Stack.Screen options={{ headerShown: false }} name="TipoCitasCreate" component={TipoCitasCreate} initialParams={usuario}/>
             <Stack.Screen options={{ headerShown: false }} name="TipoCitasEdit" component={TipoCitasEdit} initialParams={usuario}/>

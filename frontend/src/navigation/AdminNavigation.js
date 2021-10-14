@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TipoCitasNavigation from './TipoCitasNavigation';
 import TipoUsuarioNavigation from './TipoUsuarioNavigation';
-
+import Perfil from '../screens/Usuario/Perfil'
 
 const Drawer = createDrawerNavigator();
 
@@ -48,10 +48,10 @@ const AdminNavigation = ({ route, navigation }) => {
     return ( 
         <Drawer.Navigator initialRouteName="AdminHome">
             <Drawer.Screen name="Inicio" component={AdminHome} initialParams={usuario}/>
-            <Drawer.Screen name="Tipo de Usuarios" component={TipoUsuarioNavigation} initialParams={usuario}/>
+            <Drawer.Screen name="Mi Perfil" component={Perfil} initialParams={usuario}/>
             <Drawer.Screen name="Empleados" component={AdminHome} initialParams={usuario}/>
+            <Drawer.Screen name="Tipo de Usuarios" component={TipoUsuarioNavigation} initialParams={usuario}/>
             <Drawer.Screen name="Tipo de Citas" component={TipoCitasNavigation} initialParams={usuario}/>
-            <Drawer.Screen name="Mi Perfil" component={AdminHome} initialParams={usuario}/>
             <Drawer.Screen name="Cerrar Sesión" component={CerrarSesion} initialParams={usuario} options={{headerShown: false}}/>
         </Drawer.Navigator>
     )
