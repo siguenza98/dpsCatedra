@@ -56,16 +56,12 @@ class TipoUsuarioController extends Controller
     public function update(Request $request, $id)
     {
         //seleccionando registro segun id para modifircarlo
-        $usuario = Usuario::find($id);
+        $tipo = TipoUsuario::find($id);
         //asignando datos del request al objeto
-        $usuario->nombres = $request->input('nombres');
-        $usuario->apellidos = $request->input('apellidos');
-        $usuario->correo = $request->input('correo');
-        $usuario->telefono = $request->input('telefono');
-        $usuario->password = $request->input('password');
-        $usuario->categoria = $request->input('categoria');
+        $tipo->detalle = $request->input('detalle');
+        
         //guardando cambios en el registro
-        if($usuario->save()){
+        if($tipo->save()){
             $respuesta = ['resultado'=>'OK'];
             $code = 200;//peticion con exito
         }else{
@@ -78,7 +74,7 @@ class TipoUsuarioController extends Controller
     public function destroy($id)
     {
         //buscando registro por id
-        $usuario = Usuario::find($id);
+        $usuario = TipoUsuario::find($id);
         if($usuario->delete()){
             $respuesta = ['resultado'=>'OK'];
             $code = 200;//peticion con exito

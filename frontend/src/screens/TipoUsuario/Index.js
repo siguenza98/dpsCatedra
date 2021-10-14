@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { Icon } from 'react-native-elements'
 
 const Index = ({ route, navigation }) => {
     const [tipos, setTipos] = useState([]);
-    useEffect(() => {
-        getTipos();
-    }, []);
+    
 
     const getTipos = () => {
 
@@ -17,38 +16,57 @@ const Index = ({ route, navigation }) => {
                 'Content-Type': 'application/json'
             },
         })
-        .then((response) => response.json())
-        .then((json) => {
-            if (json.length != 0) {
-                setTipos(json);
-                console.log(json);
-            }
-        })
-        .catch((error) => {
-            setErrorText("Error al obtener los datos.");
-        });
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.length != 0) {
+                    setTipos(json);
+                }
+            })
+            .catch((error) => {
+                setErrorText("Error al obtener los datos.");
+            });
+    }
+    
+
+    const editarTipo = (tipo) => {
+        navigation.push('TipoUsuarioEdit', {tipo});
     }
 
-    const editarTipo = (idTipo)=>{
-        alert(idTipo);
-    }
+    useEffect(() => {
+        getTipos();
+    }, []);
 
     return (
         <KeyboardAvoidingView
             style={styles.container}
             behavior="padding">
+            <Text style={styles.titulo}>Detalle</Text>
+            <View style={styles.item}>
+                <View style={{ width: "60%", alignItems: "flex-start", justifyContent: "center" }}>
+                    <Text style={styles.detalle}>Tipos de Usuario</Text>
+                </View>
+
+                <View style={{ width: "40%", alignItems: "flex-end" }}>
+                    <Text style={styles.detalle}>Acciones</Text>
+                </View>
+            </View>
             <FlatList
                 data={tipos}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.detalle}</Text>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={()=>editarTipo(item.id.toString())}
-                        >
-                            <Text  style={styles.buttonText}>Editar</Text>
-                        </TouchableOpacity>
+                    <View style={styles.item}>
+                        <View style={{ width: "60%", alignItems: "flex-start", justifyContent: "center" }}>
+                            <Text style={styles.detalle}>{item.detalle}</Text>
+                        </View>
+
+                        <View style={{ width: "40%", alignItems: "flex-end" }}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => editarTipo(item)}
+                            >
+                                <Icon name='edit' color="#FFFFFF"  />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 )}
             />
@@ -61,9 +79,9 @@ export default Index
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "#b2dfdb"
+        flexDirection: "column",
+        backgroundColor: "#b2dfdb",
+        width: "100%"
 
     },
     inputContainer: {
@@ -89,10 +107,13 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: "#82ada9",
-        width: '100%',
+        width: 50,
+        height: 50,
         padding: 15,
+        marginBottom: 5,
         borderRadius: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        fontSize: 23
     },
     buttonOutline: {
         backgroundColor: 'white',
@@ -117,9 +138,27 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     titulo: {
-        fontSize: 35,
+        fontSize: 25,
+        alignSelf: "center",
         color: 'white',
-        fontWeight: 700
+        fontWeight: 700,
+        marginTop: 20,
+        marginBottom: 40
+    },
+    item: {
+        display: "flex",
+        flexDirection: "row",
+        width: "80%",
+        justifyContent: "space-around",
+        borderBottomColor: "#82ada9",
+        borderBottomWidth: 2,
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: 10
+
+    },
+    detalle: {
+        fontSize: 18
     }
 })
 
