@@ -9,7 +9,11 @@ const UsuarioHome = ({route, navigation}) => {
     
     return (
         <View>
+
+            <Text>Hola, {usuario.nombres}</Text>
+
             <Text>Bienvenido, {usuario.nombres}</Text>
+
         </View>
     )
 }
