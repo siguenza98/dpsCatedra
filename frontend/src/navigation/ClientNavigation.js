@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TipoCitasNavigation from './TipoCitasNavigation';
 import TipoUsuarioNavigation from './TipoUsuarioNavigation';
 import Perfil from '../screens/Usuario/Perfil';
-import DatosMascota from '../Cliente/DatosMascota';
-import CrearCitas from '../Cliente/CrearCitas'
+import DatosMascota from '../screens/Cliente/DatosMascota';
+import CrearCitas from '../screens/Cliente/CrearCitas'
 
 const Drawer = createDrawerNavigator();
 
