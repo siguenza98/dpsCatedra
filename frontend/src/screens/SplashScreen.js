@@ -26,7 +26,10 @@ const SplashScreen = ({navigation}) => {
                 }
                 if(usuario.tipousuario_id == 4){
                     setTimeout(() => {
+
                         navigation.push('ClientNavigation', usuario);
+                        navigation.push('UsuarioHome', usuario);
+
                     }, 2000);
                 }    
             }  

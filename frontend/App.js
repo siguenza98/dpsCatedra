@@ -12,7 +12,10 @@ import RegistrarseScreen from './src/screens/RegistrarseScreen';
 /*Homes*/
 import UsuarioHome from './src/screens/Usuario/UsuarioHome';
 import AdminNavigation from './src/navigation/AdminNavigation';
+
 import ClientNavigation from './src/navigation/ClientNavigation';
+=======
+
 
 
 
@@ -28,7 +31,9 @@ export default function App() {
 
         <Stack.Screen options={{headerShown: false}} name="UsuarioHome" component={UsuarioHome} />
         <Stack.Screen options={{headerShown: false}} name="AdminNavigation" component={AdminNavigation} />
+
         <Stack.Screen options={{headerShown: false}} name="ClientNavigation" component={ClientNavigation}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
