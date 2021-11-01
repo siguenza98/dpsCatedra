@@ -6,10 +6,7 @@ Ciclo II 2021
 
 Integrantes:
  - Fernando José Sigüenza Rodríguez SR161939
- - Andy Hernandez Solorzano HS170505
- - Renzo Alexander Genovez Gomez GG162362
- - Claudia Raquel Cortez Rodezno CR160471
- - Mauricio Alexander Machado Rivas MR171225
+ 
 
 ## Programas/archivos necesarios
 
