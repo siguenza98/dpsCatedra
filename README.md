@@ -6,10 +6,7 @@ Ciclo II 2021
 
 Integrantes:
  - Fernando José Sigüenza Rodríguez SR161939
- - Andy Hernandez Solorzano HS170505
- - Renzo Alexander Genovez Gomez GG162362
- - Claudia Raquel Cortez Rodezno CR160471
- - Mauricio Alexander Machado Rivas MR171225
+ 
 
 ## Programas/archivos necesarios
 
@@ -34,6 +31,7 @@ Integrantes:
 4. El proyecto se abrirá por si mismo en el navegador
 
 ## Enlaces
+- [Video demostrativo](https://youtu.be/e3IivmM49c0)
 - [Trello](https://trello.com/petya175)
 - [Avance 1](https://docs.google.com/document/d/1B-8AZnB5ez5oxT0fwDOb4hkKZC_GxV1CviMRGzR4qew/edit)
 
