@@ -48,7 +48,6 @@ const AdminNavigation = ({ route, navigation }) => {
     return ( 
         <Drawer.Navigator initialRouteName="AdminHome">
             <Drawer.Screen name="Inicio" component={AdminHome} initialParams={usuario}/>
-            <Drawer.Screen name="Mi Perfil" component={Perfil} initialParams={usuario}/>
             <Drawer.Screen name="Empleados" component={AdminHome} initialParams={usuario}/>
             <Drawer.Screen name="Tipo de Usuarios" component={TipoUsuarioNavigation} initialParams={usuario}/>
             <Drawer.Screen name="Tipo de Citas" component={TipoCitasNavigation} initialParams={usuario}/>

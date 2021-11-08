@@ -32,11 +32,22 @@ const Detalles = ({ navigation, route }) => {
                 </View>
 
                 <View style={styles.inputContainer}>
-                    <Text style={styles.labelInput}>Motivo de la Cita</Text>
+                    <Text style={styles.labelInput}>Fecha de la Cita</Text>
                     <TextInput
                         value={cita.fecha + " " + cita.hora}
                         style={styles.input}
                         editable="false"
+                    />
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <Text style={styles.labelInput}>Motivo de la Cita</Text>
+                    <TextInput
+                        value={cita.motivo}
+                        style={styles.input}
+                        editable="false"
+                        multiline={true}
+                        numberOfLines = "3"
                     />
                 </View>
 
@@ -57,7 +68,7 @@ const Detalles = ({ navigation, route }) => {
                 />
 
                 <View style={styles.inputContainer}>
-                    <Text style={styles.labelInput}>Mascota</Text>
+                    <Text style={styles.labelInput}>Nombre de la Mascota</Text>
                     <TextInput
                         value={cita.mascotanombre}
                         style={styles.input}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 
 const Edit = ({ navigation, route }) => {
-    const [errorText, setErrorText] =useState('');
+    const [errorText, setErrorText] = useState('');
     const [detalle, setDetalle] = useState('');
     const [tipo, setTipo] = useState('');
 
@@ -11,42 +11,43 @@ const Edit = ({ navigation, route }) => {
         setDetalle(route.params.tipo.detalle);
     }, []);
 
-    const validarEditar = () =>{
+    const validarEditar = () => {
         var validado = true;
-        if(detalle ===""){
+        if (detalle === "") {
             validado = false;
             setErrorText("El nombre del tipo de usuario no puede ser vacio.");
         }
 
-        if(validado){
+        if (validado) {
             handleEdit();
         }
     }
 
     const handleEdit = () => {
         setErrorText("");
-        fetch('http://127.0.0.1:8000/api/vetya-tipousuarios/' + tipo.id, { 
-            method: 'PUT', 
-            headers: { 
-                Accept: 'application/json', 
-                'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ 
+        fetch('http://127.0.0.1:8000/api/vetya-tipousuarios/' + tipo.id, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 detalle: detalle,
-            }) 
+            })
         })
-        .then((response)=>response.json())
-        .then((json)=>{
-            console.log(json);
-            if(json.resultado === "OK"){
-                alert("Se ha editado con exito.");
-                navigation.push("TipoUsuarioIndex");
-            }else{
-                setErrorText("Hubo un error al editar.");
-            }
-        })
-        .catch((error)=>{
-            setErrorText(error);
-        });
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                if (json.resultado === "OK") {
+                    alert("Se ha editado con exito.");
+                    navigation.push("TipoUsuarioIndex");
+                } else {
+                    setErrorText("Hubo un error al editar.");
+                }
+            })
+            .catch((error) => {
+                setErrorText(error);
+            });
     }
 
     return (
@@ -56,6 +57,8 @@ const Edit = ({ navigation, route }) => {
                 style={styles.container}
                 behavior="padding"
             >
+                <Text style={styles.titulo}>Modificar Tipo de Usuario</Text>
+
                 <View style={styles.inputContainer}>
                     <Text style={styles.labelInput}>Detalle</Text>
                     <TextInput
@@ -100,9 +103,9 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '80%'
     },
-    labelInput:{
+    labelInput: {
         fontWeight: 500,
-        color:"#505050"
+        color: "#505050"
     },
     input: {
         backgroundColor: 'white',
@@ -141,10 +144,18 @@ const styles = StyleSheet.create({
         fontWeight: 700,
         fontSize: 16
     },
-    errorText:{
+    errorText: {
         color: "#e53935",
         fontWeight: 700,
         fontSize: 18,
         alignSelf: 'center'
+    },
+    titulo: {
+        fontSize: 25,
+        alignSelf: "center",
+        color: 'white',
+        fontWeight: 700,
+        marginTop: 20,
+        marginBottom: 40
     }
 })
