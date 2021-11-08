@@ -12,10 +12,7 @@ const SplashScreen = ({navigation}) => {
     const getData = async () => {  
         try {   
             const logueado = await AsyncStorage.getItem('@logueado');
-            /*
-            await AsyncStorage.removeItem('@logueado');
-            await AsyncStorage.removeItem('@usuario');
-           */
+
             if(logueado !== null) {      
                 var usuario = await AsyncStorage.getItem('@usuario');
                 usuario = JSON.parse(usuario);
@@ -24,11 +21,17 @@ const SplashScreen = ({navigation}) => {
                         navigation.push('AdminNavigation', usuario);
                     }, 2000);
                 }
+
+                if(usuario.tipousuario_id == 2){
+                    setTimeout(() => {
+                        navigation.push('VeterinarioNavigation', usuario);
+                    }, 2000);
+                }
+                
                 if(usuario.tipousuario_id == 4){
                     setTimeout(() => {
 
                         navigation.push('ClientNavigation', usuario);
-                        navigation.push('UsuarioHome', usuario);
 
                     }, 2000);
                 }    

@@ -1,46 +1,92 @@
 import React, { useState, useEffect } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import CalendarPicker from 'react-native-calendar-picker';
 
-const Mascota = ({navigation, route}) => {
-  
-    const [fecha, setFecha] = useState('');
+
+const CrearCita = ({ navigation, route }) => {
+    var usuario = route.params;
+
+    const [fecha, setFecha] = useState();
+    const [fechaActual, setFechaActual] = useState(new Date());
+
     const [hora, setHora] = useState('');
+    const [horas, setHoras] = useState();
+    const [minuto, setMinuto] = useState();
+
     const [motivo, setMotivo] = useState('');
-    const [estado, setEstado] = useState('');
-    const [detalles, setDetalles] = useState(' ');
-    const [tipo_cita, setTipo_cita] = useState(' ');
-    const [clientes, setClientes] = useState(' ');
-    const [empleado, setEmpleado] = useState(' ');
+    const [tipocita, setTipoCita] = useState(' ');
     const [mascota, setMascota] = useState(' ');
     const [errorText, setErrorText] = useState(' ');
 
-    const validarRegistrar = () =>{
+    const [listaMascotas, setListaMascotas] = useState([]);
+    const [listaTipoCitas, setListaTipoCitas] = useState([]);
+
+    const getMascotas = () => {
+        //Conexion a la api
+        fetch('http://127.0.0.1:8000/api/mismascotas', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                usuario_id: usuario.id,
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.length != 0) {
+                    setListaMascotas(json.map((mascota) =>
+                        <Picker.Item label={mascota.nombre} value={mascota.id} />
+                    ));
+                    setMascota(json[0].id);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Error al obtener los datos.");
+            });
+    }
+
+    const getTipoCitas = () => {
+
+        //Conexion a la api
+        fetch('http://127.0.0.1:8000/api/vetya-tipocitas', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.length != 0) {
+                    setListaTipoCitas(json.map((tipo) =>
+                        <Picker.Item label={tipo.detalle} value={tipo.id} />
+                    ));
+                    setTipoCita(json[0].id);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Error al obtener los datos.");
+            });
+    }
+
+    const validarRegistrar = () => {
         var validado = true;
         var mensaje = "";
-        if(fecha === "")
+        if (motivo === "")
             validado = false;
-        if(hora === "")
-            validado = false;
-        if(motivo === "")
-            validado = false;
-        if(estado === "")
-            validado = false;
-        if(detalles === "")
-            validado = false;
-        if(tipo_cita === "")
-            validado = false;
-        if(clientes === "")
-            validado = false;
-        if (empleado==="")
-            validado= false;
-        if (mascota==="")
-            validado= false;
-
-        if(validado){
+       
+        if (validado) {
+            setHora(horas+":"+minuto);
+            console.log("hora: "+hora + " fecha" + fecha + " mascota" + mascota + " tipocita" + tipocita );
             handleRegistrar();
-        }else{
+        } else {
             mensaje += "Uno o más campos están vacios.";
             setErrorText(mensaje);
         }
@@ -49,117 +95,138 @@ const Mascota = ({navigation, route}) => {
     const handleRegistrar = () => {
 
         setErrorText(" ");
-        fetch('http://127.0.0.1:8000/api/vetya-mascotas', { 
-            method: 'POST', 
-            headers: { 
-                Accept: 'application/json', 
-                'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ 
+        fetch('http://127.0.0.1:8000/api/vetya-citas', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 fecha: fecha,
-                hora: hora,
+                hora: horas+":"+minuto,
                 motivo: motivo,
-                estado: estado,
-                detalles: detalles,
-                tipo_cita: tipo_cita,
-                clientes: clientes,
-                empleado: empleado,
+                tipocita: tipocita,
                 mascota: mascota,
-            }) 
+                cliente_id: usuario.id
+            })
         })
-        .then((response)=>response.json())
-        .then((json)=>{
-            console.log(json);
-            if(json.resultado === "OK"){
-                alert("Se ha registrado con exito.");
-            }else{
-                alert("Hubo un error al registrarse.");
-            }
-        })
-        .catch((error)=>{
-            setErrorText(error);
-        });
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                if (json.resultado === "OK") {
+                    alert("Se ha agendado con exito.");
+                    navigation.goBack();
+                } else {
+                    alert("Hubo un error al agendar la cita.");
+                }
+            })
+            .catch((error) => {
+                setErrorText(error);
+            });
     }
-    
-    const usuario = route.params;
-    console.log(usuario);
+
+    useEffect(() => {
+        getMascotas();
+        getTipoCitas();
+        setHoras('08');
+        setMinuto('00');
+        setHora('08:00');
+        setFecha(fechaActual.getFullYear()+"-"+fechaActual.getMonth()+"-"+fechaActual.getDate());
+    }, []);
+
     return (
-        <>
-        
+
         <KeyboardAvoidingView
             style={styles.container}
             behavior="padding"
         >
-            <View style={styles.inputContainer}>
+            <View style={styles.inputContainerCalendar}>
                 <Text style={styles.labelInput}>Fecha</Text>
-                <TextInput
-                    onChangeText={text => setFecha(text)}
-                    style={styles.input}
+
+                <CalendarPicker
+                    selectedDayColor="#82ada9"
+                    minDate={fechaActual}
+                    onDateChange={date => setFecha(date)}
+                    weekdays={['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']}
+                    months={['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']}
+                    previousTitle="Anterior"
+                    nextTitle="Siguiente"
                 />
+
             </View>
             <View style={styles.inputContainer}>
                 <Text style={styles.labelInput}>Hora</Text>
-                <TextInput
-                    onChangeText={text => setHora(text)}
-                    style={styles.input}
-                />
+
+                <View style={styles.item}>
+                    <View style={{ width: "45%", alignItems: "flex-start", justifyContent: "center" }}>
+                        <Picker
+                            onValueChange={(itemValue, itemIndex) =>
+                                setHoras(itemValue)
+                            }
+                            style={styles.input}
+                        >
+                            <Picker.Item label="08" value="08" />
+                            <Picker.Item label="09" value="09" />
+                            <Picker.Item label="10" value="10" />
+                            <Picker.Item label="11" value="11" />
+                            <Picker.Item label="12" value="12" />
+                            <Picker.Item label="13" value="13" />
+                            <Picker.Item label="14" value="14" />
+                            <Picker.Item label="15" value="15" />
+                            <Picker.Item label="16" value="16" />
+                        </Picker>
+                    </View>
+
+                    <View style={{ width: "45%", alignItems: "flex-start", justifyContent: "center" }}>
+                        <Picker
+                            onValueChange={(itemValue, itemIndex) =>
+                                setMinuto(itemValue)
+                            }
+                            style={styles.input}
+                        >
+                            <Picker.Item label="00" value="00" />
+                            <Picker.Item label="15" value="15" />
+                            <Picker.Item label="30" value="30" />
+                            <Picker.Item label="45" value="45" />
+                            
+                        </Picker>
+                    </View>
+
+                </View>
             </View>
             <View style={styles.inputContainer}>
                 <Text style={styles.labelInput}>Motivo de la Cita</Text>
                 <TextInput
                     onChangeText={text => setMotivo(text)}
                     style={styles.input}
+                    multiline={true}
+                    numberOfLines={3}
                 />
             </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelInput}>Estado de la Cita</Text>
-                <TextInput
-                    onChangeText={text => setEstado(text)}
-                    style={styles.input}
-                />
-            </View>
-            
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelInput}>Detalles de la Cita</Text>
-                <TextInput
-                    onChangeText={text => setDetalles(text)}
-                    style={styles.input}
-                />
-            </View>
-          
             <View style={styles.inputContainer}>
                 <Text style={styles.labelInput}>Tipo de Cita</Text>
-                <TextInput
-                    onChangeText={text => setTipo_cita(text)}
+                <Picker
+                    onValueChange={(itemValue, itemIndex) =>
+                        setTipoCita(itemValue)
+                    }
                     style={styles.input}
-                />
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelInput}>Nombre del Cliente</Text>
-                <TextInput
-                    onChangeText={text => setClientes(text)}
-                    style={styles.input}
-                />
+                >
+                    {listaTipoCitas}
+                </Picker>
             </View>
-
-            <View style={styles.inputContainer}>
-                <Text style={styles.labelInput}>Nombre del Empleado</Text>
-                <TextInput
-                    onChangeText={text => setEmpleado(text)}
-                    style={styles.input}
-                />
-            </View>
-
             <View style={styles.inputContainer}>
                 <Text style={styles.labelInput}>Mascota</Text>
-                <TextInput
-                    onChangeText={text => setMascota(text)}
+                <Picker
+                    onValueChange={(itemValue, itemIndex) =>
+                        setMascota(itemValue)
+                    }
                     style={styles.input}
-                />
+                >
+                    {listaMascotas}
+                </Picker>
             </View>
 
-
-                <Text style={styles.errorText}>{errorText}</Text>
-
-            </View>
+            <Text style={styles.errorText}>{errorText}</Text>
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
@@ -177,26 +244,35 @@ const Mascota = ({navigation, route}) => {
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
-        </>
+
     )
 }
 
-export default Mascota
+export default CrearCita
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "#b2dfdb"
+        backgroundColor: "#b2dfdb",
+        height: "100%",
+        overflow: "scroll",
+        maxWidth: "100%"
 
     },
     inputContainer: {
-        width: '80%'
+        width: '80%',
     },
-    labelInput:{
+    inputContainerCalendar: {
+        flex: 1,
+        width: '70%',
+        minHeight: "550px",
+        paddingTop: "150px",
+    },
+    labelInput: {
         fontWeight: 500,
-        color:"#505050"
+        color: "#505050"
     },
     input: {
         backgroundColor: 'white',
@@ -204,7 +280,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 10,
         marginBottom: 15,
-        fontSize: 15
+        fontSize: 21,
+        borderColor: 'transparent',
+        color: "black"
     },
     buttonContainer: {
         width: '60%',
@@ -223,7 +301,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 5,
         borderColor: "#82ada9",
-        borderWidth: 2
+        borderWidth: 2,
+        marginBottom: 20
     },
     buttonText: {
         color: 'white',
@@ -235,11 +314,21 @@ const styles = StyleSheet.create({
         fontWeight: 700,
         fontSize: 16
     },
-    errorText:{
+    errorText: {
         color: "#e53935",
         fontWeight: 700,
         fontSize: 18,
         alignSelf: 'center'
-    }
+    },
+    item: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-around",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: 10
+
+    },
 })
 

@@ -36,12 +36,22 @@ Route::post('/login', [LoginController::class, 'login']);
 
 //ruta a metodos del controller citas
 Route::resource('vetya-citas', CitaController::class);
+Route::post('/miscitas', [CitaController::class, 'miscitas']);
+Route::post('/citaspasadas', [CitaController::class, 'citaspasadas']);
+Route::get('/citasdisponibles', [CitaController::class, 'citasdisponibles']);
+Route::post('/citasagendadas', [CitaController::class, 'citasagendadas']);
+Route::post('/agendarcita', [CitaController::class, 'agendarcita']);
+
+
+
 
 //ruta a metodos del controller diagnosticos
 Route::resource('vetya-diagnosticos', DiagnosticoController::class);
 
 //ruta a metodos del controller mascotas
 Route::resource('vetya-mascotas', MascotaController::class);
+Route::post('/mismascotas', [MascotaController::class, 'mismascotas']);
+
 
 //ruta a metodos del controller tipo citas
 Route::resource('vetya-tipocitas', TipoCitaController::class);

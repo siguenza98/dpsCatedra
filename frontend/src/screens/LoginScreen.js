@@ -28,6 +28,7 @@ const LoginScreen = ({navigation}) => {
             }
         })
         .catch((error)=>{
+            console.log(error);
             setErrorText("Correo o contraseña incorrecta");
         });
     }
@@ -38,6 +39,12 @@ const LoginScreen = ({navigation}) => {
         await AsyncStorage.setItem('@usuario', JSON.stringify(usuario));
         if(usuario.tipousuario_id === 1){
             navigation.push("AdminNavigation", usuario);
+        }
+        if(usuario.tipousuario_id === 2){
+            navigation.push("VeterinarioNavigation", usuario);
+        }
+        if(usuario.tipousuario_id === 4){
+            navigation.push("ClientNavigation", usuario);
         }
     }
 

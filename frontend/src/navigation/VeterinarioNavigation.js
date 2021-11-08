@@ -3,15 +3,16 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, Image } from 'react-nativ
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Perfil from '../screens/Usuario/Perfil';
-import MascotasNavigation from './MascotasNavigation';
-import CitasNavigation from './CitaNavigation';
+import CitasDisponibles from '../screens/Cita/Disponibles';
+import CitasAgendadas from '../screens/Cita/Agendadas';
+import CitasDetalles from '../screens/Cita/Detalles';
 
-import CrearCitas from '../screens/Cliente/CrearCitas'
+
+
 
 const Drawer = createDrawerNavigator();
 
-const ClientHome = ({ route, navigation }) => {
+const VeterinarioHome = ({ route, navigation }) => {
     //Obtiene el valor del usuario registrado
     const Drawer = createDrawerNavigator();
     var usuario = route.params;
@@ -24,6 +25,7 @@ const ClientHome = ({ route, navigation }) => {
                 style={{ height: 100, width: 300, marginBottom: 40 }}
                 source={require('../img/logo.png')}
             />
+            <Text style={styles.titulo}>Veterinarios</Text>
         </KeyboardAvoidingView>
     )
 }
@@ -45,20 +47,21 @@ const CerrarSesion = ({ route, navigation }) => {
     return(<></>);
 }
 
-const AdminNavigation = ({ route, navigation }) => {
+const VeterinarioNavigation = ({ route, navigation }) => {
     var usuario = route.params;
     return ( 
-        <Drawer.Navigator initialRouteName="ClientHome">
-            <Drawer.Screen name="Inicio" component={ClientHome} initialParams={usuario}/>
-            <Drawer.Screen name="Agendar Cita" component={CrearCitas} initialParams={usuario}/>
-            <Drawer.Screen name="Mis Citas" component={CitasNavigation} initialParams={usuario}/>
-            <Drawer.Screen name="Mis Mascotas" component={MascotasNavigation} initialParams={usuario}/>
+        <Drawer.Navigator initialRouteName="VeterinarioHome">
+            <Drawer.Screen name="Inicio" component={VeterinarioHome} initialParams={usuario}/>
+            <Drawer.Screen name="Citas Disponibles" component={CitasDisponibles} initialParams={usuario}/>
+            <Drawer.Screen name="Citas Agendadas" component={CitasAgendadas} initialParams={usuario}/>
+            <Drawer.Screen name="Citas Detalles" component={CitasDetalles} initialParams={usuario}/>
+
             <Drawer.Screen name="Cerrar Sesión" component={CerrarSesion} initialParams={usuario} options={{headerShown: false}}/>
         </Drawer.Navigator>
     )
 }
 
-export default AdminNavigation
+export default VeterinarioNavigation
 
 const styles = StyleSheet.create({
     container: {
