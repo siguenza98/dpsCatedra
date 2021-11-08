@@ -34,6 +34,7 @@ Integrantes:
 - [Video demostrativo](https://youtu.be/e3IivmM49c0)
 - [Trello](https://trello.com/petya175)
 - [Avance 1](https://docs.google.com/document/d/1B-8AZnB5ez5oxT0fwDOb4hkKZC_GxV1CviMRGzR4qew/edit)
+- [Manual de Usuario](https://drive.google.com/file/d/1Kd6ZCIw5kP6Uc6xH21cPciIPZ_BRpArI/view?usp=sharing)
 
 ## Licencia
 Licencia Creative Commons, ver archivo LICENSE
