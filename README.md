@@ -1,4 +1,4 @@
-# <p align="center">Vet Ya!</p>
+# <p align="center">DSM</p>
 
 Proyecto de catedra para la materia Desarrollo de Software para Móviles DSM104 G02T
 
